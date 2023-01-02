@@ -44,11 +44,11 @@ app.set("trust proxy", 1);
 app.use(limiter);
 
 app.get("/", (req, res) => {
-  res.send("Blogs API");
+  res.send("<h1>Blogs API</h1><a href='/api-docs'>Documentation</a>");
 });
 
 // Middleware for the swagger document
-app.use("/api-use", swaggerUI.serve, swaggerUI.setup(swaggerDocument));
+app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 
 // Routes
 app.use("/blogs-api/auth", authRoute);
