@@ -1,6 +1,7 @@
 const Blog = require("../models/blogs");
 const { BadRequestError, NotFoundError } = require("../errors");
 const { StatusCodes } = require("http-status-codes");
+const blogs = require("../models/blogs");
 
 // Algorithm to calculate for reading_time
 const calculateReadingTime = (text) => {
@@ -18,31 +19,48 @@ const calculateReadingTime = (text) => {
 
 // All users can access posted blogs
 const getAllBlogs = async (req, res, next) => {
-  const blogs = await Blog.find({});
+  // Adding Pagination
+  const page = Number(req.query.page) || 1;
+  const limit = Number(req.query.limit) || 20;
+  const skip = (page - 1) * limit;
+  const blogs = await Blog.find({ state: "Published" }).skip(skip).limit(limit);
   res.status(StatusCodes.OK).json({ blogs, count: blogs.length });
 };
 
 // Retrieve a Single Blog from the database
 const getSingleBlog = async (req, res, next) => {
   const {
-    user: { userId },
+    //user: { userId },
     params: { id: blogId },
   } = req;
 
   const blog = await Blog.findOne({
     _id: blogId,
-    author: userId,
+    // author: userId,
   });
 
   if (!blog) {
     throw new NotFoundError("Blog does not exist");
   }
+
+  // Update blog read count
+  blog.read_count = 0;
+  blog.read_count += 1;
+  await blog.save();
+
   res.status(StatusCodes.OK).json({ blog });
 };
 
 // Registered & Logged in users retrieves all their posted blogs
 const getBlogsByRegisteredUser = async (req, res, next) => {
-  const blogs = await Blog.find({ author: req.user.userId }).sort("state");
+  // Adding Pagination
+  const page = Number(req.query.page) || 1;
+  const limit = Number(req.query.limit) || 20;
+  const skip = (page - 1) * limit;
+  const blogs = await Blog.find({ author: req.user.userId })
+    .sort("state")
+    .skip(skip)
+    .limit(limit);
   res.status(StatusCodes.OK).json({ blogs, count: blogs.length });
 };
 
