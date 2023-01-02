@@ -5,7 +5,7 @@ const blogsSchema = new mongoose.Schema(
     title: {
       type: String,
       required: [true, "Provide Blog title"],
-      unique: [true, "Title exists already"],
+      unique: [true, "Title already exists. Provide another title"],
     },
     blogImage: {
       type: String,
@@ -43,6 +43,7 @@ const blogsSchema = new mongoose.Schema(
     },
     read_count: {
       type: Number,
+      required: true,
     },
     reading_time: {
       type: String,
