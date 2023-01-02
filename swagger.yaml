@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  title: Blogs-Api
+  title: Blogs-Api-v2
   contact: {}
   version: "1.0"
 servers:
@@ -177,10 +177,10 @@ paths:
               allOf:
                 - $ref: "#/components/schemas/LoginRequest"
                 - example:
-                    email: lizzy@test.com
+                    email: marilyn@test.com
                     password: test123
             example:
-              email: lizzy@test.com
+              email: marilyn@test.com
               password: test123
         required: true
       responses:
@@ -269,7 +269,7 @@ components:
         password:
           type: string
       example:
-        email: lizzy@test.com
+        email: marilyn@test.com
         password: test123
   securitySchemes:
     bearer:
