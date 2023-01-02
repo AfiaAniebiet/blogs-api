@@ -20,7 +20,7 @@ const limiter = rateLimiter({
 
 // Importing custom files
 const MONGODB_CONNECTION = require("./db/connect");
-const authUser = require("./middleware/authentication");
+//const authUser = require("./middleware/authentication");
 const authRoute = require("./routes/auth");
 const blogsRoute = require("./routes/blogs");
 
@@ -40,7 +40,7 @@ app.use(limiter);
 
 // Routes
 app.use("/blogs-api/auth", authRoute);
-app.use("/blogs-api/blogs", authUser, blogsRoute);
+app.use("/blogs-api/blogs", blogsRoute);
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
 
