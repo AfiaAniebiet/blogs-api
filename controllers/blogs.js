@@ -44,9 +44,11 @@ const getSingleBlog = async (req, res, next) => {
   }
 
   // Update blog read count
-  blog.read_count = 0;
-  blog.read_count += 1;
-  await blog.save();
+  // blog.read_count = 0;
+  // while (blog.read_count <= Object.values) {
+  //   blog.read_count += 1;
+  // }
+  // await blog.save();
 
   res.status(StatusCodes.OK).json({ blog });
 };

@@ -1,0 +1,281 @@
+openapi: 3.0.0
+info:
+  title: Blogs-Api
+  contact: {}
+  version: "1.0"
+servers:
+  - url: https://blogs-api-1ggx.onrender.com/blogs-api
+    variables: {}
+paths:
+  /blogs:
+    get:
+      tags:
+        - Blogs Route
+      summary: Get All Published Blogs
+      operationId: GetAllPublishedBlogs
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security: []
+    post:
+      tags:
+        - Blogs Route
+      summary: Post Blog
+      operationId: PostBlog
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/PostBlogRequest"
+                - example:
+                    title: Senate passes 2023 Budget
+                    blogImage: https://www.ripplesnigeria.com/wp-content/uploads/2022/10/budget_.jpg
+                    description: Out of the total sum, N967.48 billion was allocated to statutory transfers; N6.55 trillion for debt service; N8.32 trillion for recurrent (non-debt) expenditure; while the sum of N5.97 trillion was allocated to contribution to the development fund for capital expenditure for the year ending December 31, 2023.
+                    blogBody: The Senate has passed the nation’s budget for the 2023 fiscal year. The budget was increased from N20.5 trillion presented by President Muhammadu Buhari in October, to N21.8 trillion (21,827,188,747,391). This shows an increase of over N1.3 trillion. The lawmakers increased the Oil Benchmark Price from $70 to $75 to reflect the current market values of the oil barrel in the international market. Nigeria’s daily oil production rate was pegged at 1.69 million per barrel and the exchange rate at N435 per dollar. The passage of the budget was a sequel to consideration of the report of the Senate Committee on Appropriation – presented by the chairman, Barau Jibrin. In his presentation, the lawmaker recommended that N967.4 billion (967,486,010,536) be approved for Statutory Transfers – a category into which the National Assembly budget falls.
+                    tags: Economy
+                    state: Published
+            example:
+              title: Senate passes 2023 Budget
+              blogImage: https://www.ripplesnigeria.com/wp-content/uploads/2022/10/budget_.jpg
+              description: Out of the total sum, N967.48 billion was allocated to statutory transfers; N6.55 trillion for debt service; N8.32 trillion for recurrent (non-debt) expenditure; while the sum of N5.97 trillion was allocated to contribution to the development fund for capital expenditure for the year ending December 31, 2023.
+              blogBody: The Senate has passed the nation’s budget for the 2023 fiscal year. The budget was increased from N20.5 trillion presented by President Muhammadu Buhari in October, to N21.8 trillion (21,827,188,747,391). This shows an increase of over N1.3 trillion. The lawmakers increased the Oil Benchmark Price from $70 to $75 to reflect the current market values of the oil barrel in the international market. Nigeria’s daily oil production rate was pegged at 1.69 million per barrel and the exchange rate at N435 per dollar. The passage of the budget was a sequel to consideration of the report of the Senate Committee on Appropriation – presented by the chairman, Barau Jibrin. In his presentation, the lawmaker recommended that N967.4 billion (967,486,010,536) be approved for Statutory Transfers – a category into which the National Assembly budget falls.
+              tags: Economy
+              state: Published
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+  /blogs/user-blogs:
+    get:
+      tags:
+        - Blogs Route
+      summary: Registered User Blogs
+      operationId: RegisteredUserBlogs
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+  /blogs/blog/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: The Blog ID
+    get:
+      tags:
+        - Blogs Route
+      summary: Get Single Blog
+      operationId: GetSingleBlog
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security: []
+
+    patch:
+      tags:
+        - Blogs Route
+      summary: Update Blog
+      operationId: UpdateBlog
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/UpdateBlogRequest"
+                - example:
+                    title: iPhone 14 Pro [Updated]
+                    blogBody: Just over ten years ago, Samsung’s Galaxy Note found itself somewhat scorned on account of its 5.3in screen, at the time considered preposterously large. Apple’s then CEO, Steve Jobs, couldn’t see the point of larger phones and wearily dismissed Samsung’s Galaxy S (which was smaller than the Note). “You can’t get your hand around it,” he said, “no one’s going to buy that.” He was wrong, of course. Over the past decade we’ve demanded ever-larger phones as we’ve required them to do more stuff, from gaming to navigation to video calls to office work. Their ability to be operated easily by one hand and a dextrous thumb no longer matters. In fact, size matters. And the iPhone 14 Pro Max I’m clutching is big in every sense; everything from its screen to its processor to its lenses represents an upward push for Apple – and, crucially, it executes any task you choose to throw at it without breaking sweat.
+            example:
+              title: iPhone 14 Pro [Updated]
+              blogBody: Just over ten years ago, Samsung’s Galaxy Note found itself somewhat scorned on account of its 5.3in screen, at the time considered preposterously large. Apple’s then CEO, Steve Jobs, couldn’t see the point of larger phones and wearily dismissed Samsung’s Galaxy S (which was smaller than the Note). “You can’t get your hand around it,” he said, “no one’s going to buy that.” He was wrong, of course. Over the past decade we’ve demanded ever-larger phones as we’ve required them to do more stuff, from gaming to navigation to video calls to office work. Their ability to be operated easily by one hand and a dextrous thumb no longer matters. In fact, size matters. And the iPhone 14 Pro Max I’m clutching is big in every sense; everything from its screen to its processor to its lenses represents an upward push for Apple – and, crucially, it executes any task you choose to throw at it without breaking sweat.
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+
+    delete:
+      tags:
+        - Blogs Route
+      summary: Delete Blog
+      operationId: DeleteBlog
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+  /auth/sign-up:
+    post:
+      tags:
+        - Auth Route
+      summary: Sign Up
+      operationId: SignUp
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/SignUpRequest"
+                - example:
+                    first_name: Elizabeth
+                    last_name: James
+                    email: lizzy@test.com
+                    password: test123
+            example:
+              first_name: Elizabeth
+              last_name: James
+              email: lizzy@test.com
+              password: test123
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security: []
+  /auth/login:
+    post:
+      tags:
+        - Auth Route
+      summary: Login
+      operationId: Login
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/LoginRequest"
+                - example:
+                    email: lizzy@test.com
+                    password: test123
+            example:
+              email: lizzy@test.com
+              password: test123
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security: []
+components:
+  schemas:
+    PostBlogRequest:
+      title: PostBlogRequest
+      required:
+        - title
+        - blogImage
+        - description
+        - blogBody
+        - tags
+        - state
+      type: object
+      properties:
+        title:
+          type: string
+        blogImage:
+          type: string
+        description:
+          type: string
+        blogBody:
+          type: string
+        tags:
+          type: string
+        state:
+          type: string
+      example:
+        title: Senate passes 2023 Budget
+        blogImage: https://www.ripplesnigeria.com/wp-content/uploads/2022/10/budget_.jpg
+        description: Out of the total sum, N967.48 billion was allocated to statutory transfers; N6.55 trillion for debt service; N8.32 trillion for recurrent (non-debt) expenditure; while the sum of N5.97 trillion was allocated to contribution to the development fund for capital expenditure for the year ending December 31, 2023.
+        blogBody: The Senate has passed the nation’s budget for the 2023 fiscal year. The budget was increased from N20.5 trillion presented by President Muhammadu Buhari in October, to N21.8 trillion (21,827,188,747,391). This shows an increase of over N1.3 trillion. The lawmakers increased the Oil Benchmark Price from $70 to $75 to reflect the current market values of the oil barrel in the international market. Nigeria’s daily oil production rate was pegged at 1.69 million per barrel and the exchange rate at N435 per dollar. The passage of the budget was a sequel to consideration of the report of the Senate Committee on Appropriation – presented by the chairman, Barau Jibrin. In his presentation, the lawmaker recommended that N967.4 billion (967,486,010,536) be approved for Statutory Transfers – a category into which the National Assembly budget falls.
+        tags: Economy
+        state: Published
+    UpdateBlogRequest:
+      title: UpdateBlogRequest
+      required:
+        - title
+        - blogBody
+      type: object
+      properties:
+        title:
+          type: string
+        blogBody:
+          type: string
+      example:
+        title: iPhone 14 Pro [Updated]
+        blogBody: Just over ten years ago, Samsung’s Galaxy Note found itself somewhat scorned on account of its 5.3in screen, at the time considered preposterously large. Apple’s then CEO, Steve Jobs, couldn’t see the point of larger phones and wearily dismissed Samsung’s Galaxy S (which was smaller than the Note). “You can’t get your hand around it,” he said, “no one’s going to buy that.” He was wrong, of course. Over the past decade we’ve demanded ever-larger phones as we’ve required them to do more stuff, from gaming to navigation to video calls to office work. Their ability to be operated easily by one hand and a dextrous thumb no longer matters. In fact, size matters. And the iPhone 14 Pro Max I’m clutching is big in every sense; everything from its screen to its processor to its lenses represents an upward push for Apple – and, crucially, it executes any task you choose to throw at it without breaking sweat.
+    SignUpRequest:
+      title: SignUpRequest
+      required:
+        - first_name
+        - last_name
+        - email
+        - password
+      type: object
+      properties:
+        first_name:
+          type: string
+        last_name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        first_name: Elizabeth
+        last_name: James
+        email: lizzy@test.com
+        password: test123
+    LoginRequest:
+      title: LoginRequest
+      required:
+        - email
+        - password
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        email: lizzy@test.com
+        password: test123
+  securitySchemes:
+    bearer:
+      type: http
+      scheme: bearer
+security: []
+tags:
+  - name: Blogs Route
+  - name: Auth Route

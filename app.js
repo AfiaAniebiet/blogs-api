@@ -18,6 +18,11 @@ const limiter = rateLimiter({
   legacyHeaders: false, // Disable the X-RateLimit headers
 });
 
+// Swagger
+const swaggerUI = require("swagger-ui-express");
+const YAML = require("yamljs");
+const swaggerDocument = YAML.load("./swagger.yaml");
+
 // Importing custom files
 const MONGODB_CONNECTION = require("./db/connect");
 //const authUser = require("./middleware/authentication");
@@ -37,6 +42,13 @@ app.use(xssClean());
 
 app.set("trust proxy", 1);
 app.use(limiter);
+
+app.get("/", (req, res) => {
+  res.send("Blogs API");
+});
+
+// Middleware for the swagger document
+app.use("/api-use", swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 
 // Routes
 app.use("/blogs-api/auth", authRoute);
