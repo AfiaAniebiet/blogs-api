@@ -24,7 +24,7 @@ const getAllBlogs = async (req, res, next) => {
   const limit = Number(req.query.limit) || 20;
   const skip = (page - 1) * limit;
   const blogs = await Blog.find({ state: "Published" }).skip(skip).limit(limit);
-  res.status(StatusCodes.OK).json({ blogs, count: blogs.length });
+  return res.status(StatusCodes.OK).json({ blogs, count: blogs.length });
 };
 
 // Retrieve a Single Blog from the database
@@ -36,7 +36,7 @@ const getSingleBlog = async (req, res, next) => {
 
   const blog = await Blog.findOne({
     _id: blogId,
-    // author: userId,
+    //author: `${first_name} ${last_name}`,
   });
 
   if (!blog) {
@@ -44,11 +44,8 @@ const getSingleBlog = async (req, res, next) => {
   }
 
   // Update blog read count
-  // blog.read_count = 0;
-  // while (blog.read_count <= Object.values) {
-  //   blog.read_count += 1;
-  // }
-  // await blog.save();
+  blog.read_count += 1;
+  await blog.save();
 
   res.status(StatusCodes.OK).json({ blog });
 };
@@ -63,7 +60,7 @@ const getBlogsByRegisteredUser = async (req, res, next) => {
     .sort("state")
     .skip(skip)
     .limit(limit);
-  res.status(StatusCodes.OK).json({ blogs, count: blogs.length });
+  return res.status(StatusCodes.OK).json({ blogs, count: blogs.length });
 };
 
 const getCreateNewBlog = async (req, res, next) => {
@@ -75,7 +72,7 @@ const postNewBlog = async (req, res, next) => {
   req.body.author = req.user.userId;
   req.body.reading_time = calculateReadingTime(req.body.blogBody);
   const blog = await Blog.create(req.body);
-  res.status(StatusCodes.CREATED).json({ blog });
+  return res.status(StatusCodes.CREATED).json({ blog });
 };
 
 // Update Blog Functionality
