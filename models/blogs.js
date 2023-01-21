@@ -43,7 +43,6 @@ const blogsSchema = new mongoose.Schema(
     },
     read_count: {
       type: Number,
-      //required: true,
     },
     reading_time: {
       type: String,
